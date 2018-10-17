@@ -33,7 +33,7 @@ const CHAR *rgszAggFileNames[] =
 	"../data/dxl/minidump/EagerAggEmptyInput.mdp",
     "../data/dxl/minidump/EagerAggMinMax.mdp",
     "../data/dxl/minidump/EagerAggExpression.mdp",
-    "../data/dxl/minidump/EagerAggUnsupportedAvg.mdp",
+	"../data/dxl/minidump/EagerAggUnsupportedAgg.mdp",
 	"../data/dxl/minidump/DQA-KeepOuterReference.mdp",
 	"../data/dxl/minidump/ScalarSubqueryCountStarInJoin.mdp",
 	"../data/dxl/minidump/ScalarCorrelatedSubqueryCountStar.mdp",
@@ -93,8 +93,7 @@ const CHAR *rgszAggFileNames[] =
 //---------------------------------------------------------------------------
 //	@function:
 //		CAggTest::EresUnittest
-//
-//	@doc:
+// @doc:
 //		Unittest for expressions
 //
 //---------------------------------------------------------------------------

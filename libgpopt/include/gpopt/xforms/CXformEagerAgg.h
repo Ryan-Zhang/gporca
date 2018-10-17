@@ -81,19 +81,42 @@ namespace gpopt
 			void Transform(CXformContext *pxfctxt, CXformResult *pxfres, CExpression *pexpr) const;
 
 			// check if transform can be applied
-			BOOL CanApplyTransform(CExpression *pexprAgg, CColRefSet *push_down_gb_crs) const;
+			BOOL CanApplyTransform(CExpression *pexprAgg) const;
 
 			// is this aggregate supported for push down?
 			BOOL CanPushAggBelowJoin(CExpression *scalar_agg_func_expr) const;
 
 			// generate project lists for the lower and upper aggregates
-			// from the original aggregate
+			// from all the original aggregates
 			void PopulateLowerUpperProjectList
 			(
 			 IMemoryPool *mp,               // memory pool
 			 CExpression *orig_proj_list,   // project list of the original aggregate
 			 CExpression **lower_proj_list, // project list of the new lower aggregate
 			 CExpression **upper_proj_list  // project list of the new upper aggregate
+			) const;
+
+			// generate project element for lower aggregate for a single original aggregate
+			void PopulateLowerProjectElement
+			(
+			 IMemoryPool *mp,                // memory pool
+			 IMDId *agg_mdid,    	// original global aggregate function
+			 CWStringConst *agg_name,
+			 CExpressionArray *agg_arg_array,
+			 BOOL is_distinct,
+			 CExpression **lower_proj_elem_expr  // output project element of the new lower aggregate
+			) const;
+
+			// generate project element for upper aggregate
+			void PopulateUpperProjectElement
+			(
+			 IMemoryPool *mp,       // memory pool
+			 IMDId *agg_mdid,    	// aggregate mdid to create
+			 CWStringConst *agg_name,
+			 CColRef *lower_cr,
+			 CColRef *output_cr,
+			 BOOL is_distinct,
+			 CExpression **upper_proj_elem_expr  // output project element of the new upper aggregate
 			) const;
 
 			// return true if xform should be applied only once
